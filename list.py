@@ -86,13 +86,30 @@ class LinkedList:
         # increment the size of the list
         self.size += 1
 
-        
-
-    def insert_after(self):
+    def insert_after(self, after, new_data):
         '''
             search for a node, and insert a new node after it
         '''
-        pass
+        # keep track of the current node, starting at the head
+        current_node = self.head
+        # loop while current node exists
+        while current_node:
+            # check if current node's value equals the value we want to insert after
+            if current_node.data == after:
+                # if so, we will break the loop
+                break
+            # advance node to next node
+            current_node = current_node.next
+        # if current node is None -- return -1 (not inserted -- value not found)
+        if current_node == None:
+            return None # nothing was inserted
+        # create a new node -- with a next from the current node!
+        new_node = Node(new_data, current_node.next)
+        # overwrite current_node's next with the newly created node
+        current_node.next = new_node
+        # increment size
+        self.size += 1
+
 
 
 
@@ -104,6 +121,10 @@ my_list.insert_front(3)
 my_list.insert_front(2)
 my_list.insert_front(1)
 my_list.insert_end(15)
-print(f'head: {my_list.head}, tail: {my_list.tail}, head.next: {my_list.head.next}')
+# print(f'head: {my_list.head}, tail: {my_list.tail}, head.next: {my_list.head.next}')
+# print(my_list)
+
+my_list.insert_after(4, 'banana')
+my_list.insert_after(3, 'taco')
 print(my_list)
 
