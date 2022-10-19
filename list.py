@@ -34,7 +34,21 @@ class LinkedList:
     def __str__(self):
         # return a meaningful string representation of our list
         # iterate over the list, concatenate every node's value into a string
-        pass
+        # if the list is empty, we will just return empty
+        if len(self) == 0:
+            return '[]'
+
+        # the current node
+        current_node = self.head
+        string = str(current_node)
+        # while the current node has a next value
+        while current_node.next:
+            # business logic of the loop -- adding current node's value to our return string
+            string += f' -> {str(current_node.next)}'
+            # set the current node to be the current node's next
+            current_node = current_node.next
+
+        return f'[ {string} ]'
 
     def insert_front(self, data):
         '''
@@ -52,11 +66,27 @@ class LinkedList:
         # increment the size of our list
         self.size += 1
 
-    def insert_end(self):
+    def insert_end(self, data):
         '''
             create a new node and place it at the end of the list
         '''
-        pass
+        # if this is the first thing placed in the list
+        if len(self) == 0:
+            # set the new node to be both the head and tail of the list
+            self.head = Node(data, None)
+            self.tail = self.head
+        # if this is not the 
+        else:
+            # create a new node
+            new_node = Node(data, None)
+            # set the current tail's next to be the new node
+            self.tail.next = new_node
+            # set the tail of the list to be the new node
+            self.tail = new_node
+        # increment the size of the list
+        self.size += 1
+
+        
 
     def insert_after(self):
         '''
@@ -71,5 +101,9 @@ print(len(my_list))
 my_list.insert_front(5)
 my_list.insert_front(4)
 my_list.insert_front(3)
+my_list.insert_front(2)
+my_list.insert_front(1)
+my_list.insert_end(15)
 print(f'head: {my_list.head}, tail: {my_list.tail}, head.next: {my_list.head.next}')
+print(my_list)
 
